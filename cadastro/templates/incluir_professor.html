@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário do Professor</title>
+</head>
+<body>
+    <h1>Formulário dos Professores</h1>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Cadastrar"/>
+    </form>
+</body>
+</html>

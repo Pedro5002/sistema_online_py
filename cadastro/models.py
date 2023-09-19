@@ -20,3 +20,31 @@ class Turma(models.Model):
 
     def __str__(self):
         return f"{self.curso.nome} - {self.dataInicio} - {self.dataTermino}"
+
+class Professor(models.Model):
+    nome = models.CharField(max_length=200,
+                            null=False)
+
+    email = models.CharField(max_length=50,
+                             null=False)
+
+    telefone = models.CharField(max_length=50,
+                                null=False)
+
+    def __str__(self):
+        return self.nome
+
+class Aluno(models.Model):
+    nome = models.CharField(max_length=200,
+                            null=False)
+
+    dataNascimento = models.DateTimeField(null=False)
+
+    endereco = models.CharField(max_length=200,
+                                null=False)
+
+    email = models.CharField(max_length=50,
+                             null=False)
+
+    telefone = models.CharField(max_length=50,
+                                null=False)

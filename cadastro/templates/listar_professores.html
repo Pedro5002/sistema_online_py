@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Listar Professores</h1>
+    <a href="{% url 'incluirProfessor' %}">Cadastrar novo professor </a>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for professor in lista %}
+                <tr>
+                <td>{{ professor.nome }}</td>
+                <td>{{ professor.telefone }}</td>
+                <td>Alterar Excluir</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
