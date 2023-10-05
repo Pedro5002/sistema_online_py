@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
     <h1>Listar Professores</h1>
-    <a href="{% url 'incluirProfessor' %}">Cadastrar novo professor </a>
-    <table>
+    <a href="{% url 'incluirProfessor' %}" class="btn btn-primary">Cadastrar novo professor </a>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Nome</th>
@@ -19,10 +15,12 @@
                 <tr>
                 <td>{{ professor.nome }}</td>
                 <td>{{ professor.telefone }}</td>
-                <td>Alterar Excluir</td>
+                <td>
+                    <a href="{% url 'editarProfessor' professor.id %}">Alterar</a>
+                    <a href="{% url 'excluirProfessor' professor.id %}">Excluir</a>
+                </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-</body>
-</html>
+{% endblock %}

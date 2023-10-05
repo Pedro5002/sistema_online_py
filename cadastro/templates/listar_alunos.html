@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
     <h1>Listar Alunos</h1>
-    <a href="{% url 'incluirAluno' %}">Cadastrar novo aluno</a>
-    <table>
+    <a href="{% url 'incluirAluno' %}" class="btn btn-primary">Cadastrar novo aluno</a>
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>Nome</th>
@@ -21,10 +17,12 @@
                 <td>{{ aluno.nome }}</td>
                 <td>{{ aluno.email }}</td>
                 <td>{{ aluno.telefone }}</td>
-                <td>Alterar Excluir</td>
+                <td>
+                <a href="{% url 'editarAluno' aluno.id %}">Alterar</a>
+                <a href="{% url 'excluirAluno' aluno.id %}">Excluir</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-</body>
-</html>
+{% endblock %}

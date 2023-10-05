@@ -15,8 +15,8 @@ class Curso(models.Model):
 
 class Turma(models.Model):
     curso = models.ForeignKey(Curso, on_delete=models.DO_NOTHING)
-    dataInicio = models.DateTimeField(null=False)
-    dataTermino = models.DateTimeField(null=False)
+    dataInicio = models.DateTimeField(null=False, verbose_name='Data de Início')
+    dataTermino = models.DateTimeField(null=False, verbose_name='Data de Conclusão')
 
     def __str__(self):
         return f"{self.curso.nome} - {self.dataInicio} - {self.dataTermino}"
@@ -48,3 +48,6 @@ class Aluno(models.Model):
 
     telefone = models.CharField(max_length=50,
                                 null=False)
+
+    def __str__(self):
+        return self.nome

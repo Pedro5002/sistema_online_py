@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema acadêmico online</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'estilos.css' %}">
+</head>
+<body>
+
+    <div class="container">
+        {% if messages %}
+            {% for m in messages %}
+                <div class="alert alert-warning" role="alert">
+                    {{m}}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <nav class="navbar navbar-expand-lg">
+            <div class="conteiner-fluid">
+                <a class="navbar-brand" href="#">Sistema Online</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="list-item">
+                            <a class="nav-link" href="{% url 'listarCurso' %}">Cursos</a>
+                        </li>
+                        <li class="list-item">
+                            <a class="nav-link" href="{% url 'listarTurmas' %}">Turmas</a>
+                        </li>
+                        <li class="list-item">
+                            <a class="nav-link" href="{% url 'listarAluno' %}">Alunos</a>
+                        </li>
+                        <li class="list-item">
+                            <a class="nav-link" href="{% url 'listarProfessor' %}">Professores</a>
+                        </li>
+                        <li class="list-item">
+                            <a class="nav-link" href="{%url 'sair' %}">Sair</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% block content %}
+        {% endblock %}
+
+        <div class="modal fade" id="telaModal" tabindex="-1" role="dialog"
+    aria-labelledby="telaModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Exclusão</h4>
+                </div>
+                <form id="modelForm">
+                    <div class="modal-body">
+                        <label>Deseja excluir?</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                onclick="fecharTela()">Cancelar</button>
+                        {% csrf_token %}
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                onclick="excluir()">Excluir</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+    caminho = "";
+    var telaModal = document.getElementById('telaModal');
+    function abrirTela(url){
+        caminho = url;
+        telaModal.style.display = "block";
+        telaModal.style.paddingRight = "17px";
+        telaModal.className="modal fade show";
+    }
+
+    function fecharTela(){
+        telaModal.style.display="none"
+        telaModal.style.className="modal fade";
+
+    }
+
+     function excluir(){
+        fecharTela();
+        window.location = caminho;
+
+     }
+
+
+
+    </script>
+        {% else %}
+        <a href="{% url 'login' %}">Clique aqui para logar</a>
+        <a href="{% url 'registro' %}">Para criar uma nova conta</a>
+
+        {% endif %}
+
+    </div>
+</body>
+    {% bootstrap_javascript %}
+
+</html>

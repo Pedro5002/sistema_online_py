@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap5 %}
     <h1>Pagina do Aluno</h1>
     <form method="post">
-        {{ form.as_p }}
+        {% bootstrap_form form %}
         {% csrf_token %}
         <input type="submit" value="Gravar"/>
     </form>
-</body>
-</html>
+{% endblock %}
